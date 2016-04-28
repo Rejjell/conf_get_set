@@ -34,29 +34,6 @@ public class MainActivity extends ActionBarActivity {
 
     class clickLsitener implements View.OnClickListener{
 
-        /**	209
-         * @return RESULT_SUCCESS if success	210
-         *         RESULT_BUFFER_NOT_DEFINED if input buffer is not defined	211
-         *         RESULT_EMPTY_BUFFER if input buffer is empty	212
-         *         RESULT_PARSE_ERROR if parse error	213
-         * @param[out]: data_buffer_t *currentConfigVer	214
-         * Get configuratuion informatioon represented as value (<MYY>.<Make>.<Model>.<#>)	215
-         * Where:	216
-         * M = Code for the month. A = January, B = February, C = March, D = April, E = May	217
-         * F = June, G = July, H = August, I = September, J = October, K = November, L = December	218
-         * plus	219
-         * YY = 2 digit Year. Example: 14, 15, 16 (representing 2014, 2015, 2016, etc)	220
-         * THEN	221
-         * Make = 3 character Manufacturer name. Example VZW for Verizon Wireless	222
-         * THEN	223
-         * Model = Full model number without any Hyphens or other special characters. For Example:	224
-         * ABC-12_3 should be represented as ABC123.	225
-         * THEN	226
-         * # = Campaign Number. Initial number shall be 0	227
-         * This function can be useful when vendor tries to get short	228
-         * information about current device for future updates.	229
-         */
-
         @Override
         public void onClick(View v){
 
@@ -106,10 +83,6 @@ public class MainActivity extends ActionBarActivity {
             String kernelVer = new String(buffer);
             out.append(kernelVer);
 
-
-            //DateFormat fmt = new SimpleDateFormat("MMM dd", Locale.US);
-            //DateFormat fmt = new SimpleDateFormat("MMM dd HH:mm:ss UTC yyyy", Locale.US);
-            //Date d = fmt.parse("Jan 20 22:38:09 UTC 2016");
             Pattern p = Pattern.compile(".*(\\w{3}) \\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2} \\w{3} \\d{2}(\\d{2}).*",Pattern.MULTILINE);
             Matcher m = p.matcher(kernelVer);
             boolean b = m.find();
@@ -129,7 +102,6 @@ public class MainActivity extends ActionBarActivity {
             else
                 man = man.substring(0,3);
             out.append("Processed manufacturer " + man + "\n");
-            model += "!@#$%";
             out.append("Original model " +model + "\n");
             model = model.replaceAll("[^\\w\\d]","");
             out.append("Processed model " + model + "\n");
